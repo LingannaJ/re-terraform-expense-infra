@@ -27,10 +27,10 @@ pipeline {
                     }
                 }
                 steps{
-                sh """
-                cd 01-vpc
-                terraform plan
-                """
+                    sh """
+                    cd 01-vpc
+                    terraform plan
+                    """
             }
         }
         stage('Deploy') {
@@ -38,17 +38,16 @@ pipeline {
                     expression {
                         params.action == 'Apply'
                     }
-                }
-                               
+                }               
                 steps{
+                    sh """
+                    cd 01-vpc
+                    terraform apply -auto-approve
+                    """
                 inputs {
                     massage "should we continue?"
                     ok "Yes, we should."
                 }
-                sh """
-                cd 01-vpc
-                terraform apply -auto-approve
-                """
             }
         }
 
@@ -59,10 +58,10 @@ pipeline {
                     }
                 }
                 steps{
-                sh """
-                cd 01-vpc
-                terraform destroy -auto-approve
-                """
+                    sh """
+                    cd 01-vpc
+                    terraform destroy -auto-approve
+                    """
             }
         }        
     }
