@@ -39,10 +39,10 @@ pipeline {
                 cd 01-vpc
                 terraform apply -auto-approve
                 """
-            }
             inputs {
                 massage "should we continue?"
                 ok "Yes, we should."
+            }
             }
         }
 
