@@ -39,11 +39,12 @@ pipeline {
                         params.action == 'Apply'
                     }
                 }
+                               
+                steps{
                 inputs {
                     massage "should we continue?"
                     ok "Yes, we should."
-                }               
-                steps{
+                }
                 sh """
                 cd 01-vpc
                 terraform apply -auto-approve
