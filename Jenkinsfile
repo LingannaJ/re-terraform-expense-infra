@@ -39,10 +39,10 @@ pipeline {
                         params.action == 'Apply'
                     }
                 }
-             inputs {
-                massage "should we continue?"
-                ok "Yes, we should."
-            }               
+                inputs {
+                    massage "should we continue?"
+                    ok "Yes, we should."
+                }               
                 steps{
                 sh """
                 cd 01-vpc
