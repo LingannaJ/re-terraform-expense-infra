@@ -40,7 +40,7 @@ pipeline {
                     }
                 }     
             input {
-                massage "should we continue?"
+                message "should we continue?"
                 ok "Yes, we should."
             }                                
                 steps{         
