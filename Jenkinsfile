@@ -8,11 +8,11 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        choice(name: 'CHOICE', choices: ['Apply', 'Destroy'], description: 'Pick something')
+        choice(name: 'action', choices: ['Apply', 'Destroy'], description: 'Pick something')
     }
 
     stages {
-        stage('init') {
+        stage('Init') {
             steps {
                 sh """
                 cd 01-vpc
@@ -20,39 +20,44 @@ pipeline {
                 """
             }
         }
-        stage('plan') {
-            steps {
+        stage('Plan') {
                 when {
                     expression {
                         params.action == 'Apply'
                     }
                 }
+                steps{
                 sh """
                 cd 01-vpc
                 terraform plan
                 """
             }
         }
-        stage('deploy') {
-            steps {
+        stage('Deploy') {
+                when {
+                    expression {
+                        params.action == 'Apply'
+                    }
+                }
+             inputs {
+                massage "should we continue?"
+                ok "Yes, we should."
+            }               
+                steps{
                 sh """
                 cd 01-vpc
                 terraform apply -auto-approve
                 """
-            inputs {
-                massage "should we continue?"
-                ok "Yes, we should."
-            }
             }
         }
 
-        stage('destroy') {
-            steps {
+        stage('Destroy') {
                 when {
                     expression{
                         params.action == 'Destroy'
                     }
                 }
+                steps{
                 sh """
                 cd 01-vpc
                 terraform destroy -auto-approve
