@@ -38,17 +38,17 @@ pipeline {
                     expression {
                         params.action == 'Apply'
                     }
-                }  
-            inputs {
+                }     
+            input {
                 massage "should we continue?"
                 ok "Yes, we should."
-            }                             
-                steps{
+            }                                
+                steps{         
                     sh """
                     cd 01-vpc
                     terraform apply -auto-approve
                     """
-            }
+                }
         }
 
         stage('Destroy') {
