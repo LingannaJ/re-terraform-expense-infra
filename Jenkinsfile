@@ -33,7 +33,7 @@ pipeline {
                 """
             }
         }
-        stage('depoly') {
+        stage('deploy') {
             steps {
                 sh """
                 cd 01-vpc
