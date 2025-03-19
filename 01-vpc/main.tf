@@ -1,6 +1,5 @@
 module "aws_vpc" {
-    # source = "../../re-terraform-aws-vpc"
-    source = "git::https://github.com/LingannaJ/re-terraform-aws-vpc.git?ref=main"
+    source = "../../re-terraform-aws-vpc"
     common_tags = var.common_tags
     project_name = var.project_name
     environment = var.environment
